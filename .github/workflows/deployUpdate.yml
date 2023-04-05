@@ -12,7 +12,5 @@ jobs:
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - name: Update app spec
-        run: doctl apps update $(doctl apps list | grep webserver | awk '{print $1}') --spec deployment.yaml
       - name: Trigger deployment
-        run: doctl apps create-deployment $(doctl apps list | grep webserver | awk '{print $1}')
+        run: doctl apps create-deployment ${{ secrets.APP_ID }} --wait
