@@ -12,5 +12,7 @@ jobs:
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: auth
+        run: doctl auth init -vt ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Trigger deployment
         run: doctl apps create-deployment ${{ secrets.APP_ID }} --wait
